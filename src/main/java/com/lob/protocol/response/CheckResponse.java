@@ -127,7 +127,9 @@ public class CheckResponse extends AbstractLobResponse {
         return mailType;
     }
 
-    public DateTime getSendDate() { return sendDate; }
+    public DateTime getSendDate() {
+        return sendDate;
+    }
 
     public List<ThumbnailResponse> getThumbnails() {
         return defensiveCopy(this.thumbnails);
