@@ -21,7 +21,7 @@ public class PostcardResponse extends AbstractLobResponse {
     @JsonProperty private final String url;
     @JsonProperty private final DateTime expectedDeliveryDate;
     @JsonProperty private final String mailType;
-    @JsonProperty private final DateTime sendDate;
+    @JsonProperty private final String sendDate;
     @JsonProperty private final List<ThumbnailResponse> thumbnails;
     @JsonProperty private final String carrier;
     @JsonProperty private final List<TrackingEventResponse> trackingEvents;
@@ -37,7 +37,7 @@ public class PostcardResponse extends AbstractLobResponse {
             @JsonProperty("url") final String url,
             @JsonProperty("expected_delivery_date") final DateTime expectedDeliveryDate,
             @JsonProperty("mail_type") final String mailType,
-            @JsonProperty("send_date") final DateTime sendDate,
+            @JsonProperty("send_date") final String sendDate,
             @JsonProperty("thumbnails") final List<ThumbnailResponse> thumbnails,
             @JsonProperty("carrier") final String carrier,
             @JsonProperty("tracking_events") final List<TrackingEventResponse> trackingEvents,
@@ -99,7 +99,7 @@ public class PostcardResponse extends AbstractLobResponse {
         return mailType;
     }
 
-    public DateTime getSendDate() {
+    public String getSendDate() {
         return sendDate;
     }
 

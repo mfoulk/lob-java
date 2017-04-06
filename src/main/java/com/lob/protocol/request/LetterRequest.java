@@ -6,6 +6,8 @@ import java.io.File;
 import java.util.Collection;
 import java.util.Map;
 import org.joda.time.DateTime;
+import org.joda.time.format.ISODateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import static com.lob.Util.checkNotNull;
 
@@ -22,7 +24,8 @@ public class LetterRequest extends AbstractDataFieldRequest implements HasLobPar
     private final Boolean returnEnvelope;
     private final Integer perforatedPage;
     private final String mailType;
-    private final DateTime sendDate;
+    private final String sendDate;
+
 
 
     public LetterRequest(
@@ -36,7 +39,7 @@ public class LetterRequest extends AbstractDataFieldRequest implements HasLobPar
             final String extraService,
             final Boolean returnEnvelope,
             final Integer perforatedPage,
-            final DateTime sendDate,
+            final String sendDate,
             final String mailType,
             final Map<String, String> metadata,
             final Map<String, String> data) {
@@ -92,7 +95,7 @@ public class LetterRequest extends AbstractDataFieldRequest implements HasLobPar
 
     public String getMailType() { return mailType; }
 
-    public DateTime getSendDate() { return sendDate; }
+    public String getSendDate() { return sendDate; }
 
     @Override
     public String toString() {
@@ -124,7 +127,9 @@ public class LetterRequest extends AbstractDataFieldRequest implements HasLobPar
         private Boolean returnEnvelope;
         private Integer perforatedPage;
         private String mailType;
-        private DateTime sendDate;
+        private String sendDate;
+
+        private final static DateTimeFormatter DATE_FORMAT = ISODateTimeFormat.dateTime();
 
         private Builder() {}
 
@@ -214,6 +219,11 @@ public class LetterRequest extends AbstractDataFieldRequest implements HasLobPar
         }
 
         public Builder sendDate(final DateTime sendDate) {
+            this.sendDate = sendDate.toString(DATE_FORMAT);
+            return this;
+        }
+
+        public Builder sendDate(final String sendDate) {
             this.sendDate = sendDate;
             return this;
         }

@@ -6,6 +6,8 @@ import com.lob.id.BankAccountId;
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 import org.joda.time.DateTime;
+import org.joda.time.format.ISODateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.io.File;
 import java.util.Collection;
@@ -29,7 +31,7 @@ public class CheckRequest extends AbstractDataFieldRequest implements HasLobPara
     private final LobParam checkBottom;
     private final LobParam attachment;
     private final String mailType;
-    private final DateTime sendDate;
+    private final String sendDate;
 
     public CheckRequest(
             final Integer checkNumber,
@@ -42,7 +44,7 @@ public class CheckRequest extends AbstractDataFieldRequest implements HasLobPara
             final LobParam logo,
             final LobParam checkBottom,
             final LobParam attachment,
-            final DateTime sendDate,
+            final String sendDate,
             final String mailType,
             final Map<String, String> metadata,
             final Map<String, String> data,
@@ -129,7 +131,7 @@ public class CheckRequest extends AbstractDataFieldRequest implements HasLobPara
         return mailType;
     }
 
-    public DateTime getSendDate() {
+    public String getSendDate() {
         return sendDate;
     }
 
@@ -167,7 +169,9 @@ public class CheckRequest extends AbstractDataFieldRequest implements HasLobPara
         private LobParam checkBottom;
         private LobParam attachment;
         private String mailType;
-        private DateTime sendDate;
+        private String sendDate;
+
+        private final static DateTimeFormatter DATE_FORMAT = ISODateTimeFormat.dateTime();
 
         private Builder() {}
 
@@ -302,6 +306,11 @@ public class CheckRequest extends AbstractDataFieldRequest implements HasLobPara
         }
 
         public Builder sendDate(final DateTime sendDate) {
+            this.sendDate = sendDate.toString(DATE_FORMAT);
+            return this;
+        }
+
+        public Builder sendDate(final String sendDate) {
             this.sendDate = sendDate;
             return this;
         }

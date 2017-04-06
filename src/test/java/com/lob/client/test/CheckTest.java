@@ -48,6 +48,9 @@ public class CheckTest extends BaseTest {
         return Iterables.get(client.getAddresses(1).get(), 0);
     }
 
+    // Date time 5 days in the future
+    DateTime fiveDaysFromNow = new DateTime().plusDays(5);
+
     @Test
     public void testListChecks() throws Exception {
         final CheckResponseList responseList = client.getChecks().get();
@@ -102,9 +105,6 @@ public class CheckTest extends BaseTest {
         final AddressResponse address = getAddress();
         final BankAccountResponse bankAccount = getAndVerifyBankAccount();
 
-        // Need an API key with send_date enabled for this to work
-        // DateTime dt = new DateTime(2017, 4, 26, 0, 0, 0, 0);
-
         final CheckRequest.Builder builder = CheckRequest.builder()
             .bankAccount(bankAccount.getId())
             .description("check")
@@ -113,7 +113,7 @@ public class CheckTest extends BaseTest {
             .amount(1000)
             .message("test message")
             .checkNumber(100)
-            // .sendDate(dt)
+            .sendDate(fiveDaysFromNow)
             .memo("Test Check")
             .metadata(metadata);
 
@@ -133,6 +133,7 @@ public class CheckTest extends BaseTest {
         assertFalse(response.getUrl().isEmpty());
         assertTrue(response.getCheckNumber() > 0);
         assertTrue(response.getExpectedDeliveryDate() instanceof DateTime);
+        assertTrue(response.getSendDate() instanceof String);
         assertTrue(response.getAmount() instanceof Money);
         assertFalse(response.getThumbnails().isEmpty());
         final CheckResponse metadataResponse = client.getChecks(Filters.ofMetadata(metadata)).get().get(0);
@@ -175,6 +176,7 @@ public class CheckTest extends BaseTest {
                 .amount(10.50)
                 .file("<h1 style='padding-top:4in;'>Demo Check for {{name}}</h1>")
                 .checkNumber(100)
+                .sendDate(fiveDaysFromNow)
                 .memo("Test Check")
                 .data(data);
 
@@ -211,6 +213,7 @@ public class CheckTest extends BaseTest {
                 .file(ClientUtil.fileFromResource("8.5x11.pdf"))
                 .attachment(ClientUtil.fileFromResource("8.5x11.pdf"))
                 .checkNumber(100)
+                .sendDate(fiveDaysFromNow)
                 .memo("Test Check")
                 .data(data);
 
@@ -259,6 +262,7 @@ public class CheckTest extends BaseTest {
                 .build())
             .amount(1000)
             .memo("Test Check")
+            .sendDate(fiveDaysFromNow)
             .checkBottom("<h1 style='padding-top:4in;'>Demo Check</h1>")
             .attachment("<h1 style='padding-top:4in;'>Demo Check</h1>")
             .build();

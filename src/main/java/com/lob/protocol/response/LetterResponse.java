@@ -26,7 +26,7 @@ public class LetterResponse extends AbstractLobResponse {
     @JsonProperty private final String url;
     @JsonProperty private final DateTime expectedDeliveryDate;
     @JsonProperty private final String mailType;
-    @JsonProperty private final DateTime sendDate;
+    @JsonProperty private final String sendDate;
     @JsonProperty private final List<ThumbnailResponse> thumbnails;
     @JsonProperty private final String carrier;
     @JsonProperty private final String trackingNumber;
@@ -48,7 +48,7 @@ public class LetterResponse extends AbstractLobResponse {
             @JsonProperty("url") final String url,
             @JsonProperty("expected_delivery_date") final DateTime expectedDeliveryDate,
             @JsonProperty("mail_type") final String mailType,
-            @JsonProperty("send_date") final DateTime sendDate,
+            @JsonProperty("send_date") final String sendDate,
             @JsonProperty("thumbnails") final List<ThumbnailResponse> thumbnails,
             @JsonProperty("carrier") final String carrier,
             @JsonProperty("tracking_number") final String trackingNumber,
@@ -116,7 +116,7 @@ public class LetterResponse extends AbstractLobResponse {
 
     public String getTrackingNumber() { return trackingNumber; }
 
-    public DateTime getSendDate() {
+    public String getSendDate() {
         return sendDate;
     }
 

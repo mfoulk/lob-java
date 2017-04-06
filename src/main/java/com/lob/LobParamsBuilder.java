@@ -4,12 +4,9 @@ import com.lob.id.StringValued;
 import com.lob.protocol.request.HasLobParams;
 import com.lob.protocol.request.LobParam;
 import org.joda.money.Money;
-import org.joda.time.DateTime;
 import org.joda.money.format.MoneyAmountStyle;
 import org.joda.money.format.MoneyFormatter;
 import org.joda.money.format.MoneyFormatterBuilder;
-import org.joda.time.format.ISODateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,8 +20,6 @@ public class LobParamsBuilder {
     private final static MoneyFormatter MONEY_FORMAT = new MoneyFormatterBuilder()
         .appendAmount(MoneyAmountStyle.ASCII_DECIMAL_POINT_NO_GROUPING)
         .toFormatter();
-
-    private final static DateTimeFormatter DATE_FORMAT = ISODateTimeFormat.dateTime();
 
     private final Collection<LobParam> internalParams = new ArrayList<LobParam>();
 
@@ -88,14 +83,6 @@ public class LobParamsBuilder {
         }
 
         return put(k, MONEY_FORMAT.print(v));
-    }
-
-    public LobParamsBuilder put(final String k, final DateTime v) {
-        if (v == null) {
-            return this;
-        }
-
-        return put(k, v.toString(DATE_FORMAT));
     }
 
     public LobParamsBuilder putMap(final String prefix, final Map<String, String> theMap) {

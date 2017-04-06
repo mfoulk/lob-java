@@ -3,6 +3,8 @@ package com.lob.protocol.request;
 import com.lob.Or;
 import com.lob.id.AddressId;
 import org.joda.time.DateTime;
+import org.joda.time.format.ISODateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.io.File;
 import java.util.Collection;
@@ -21,7 +23,7 @@ public class PostcardRequest extends AbstractDataFieldRequest implements HasLobP
     private final LobParam back;
     private final String size;
     private final String mailType;
-    private final DateTime sendDate;
+    private final String sendDate;
 
     public PostcardRequest(
             final Or<AddressId, AddressRequest> to,
@@ -31,7 +33,7 @@ public class PostcardRequest extends AbstractDataFieldRequest implements HasLobP
             final LobParam back,
             final String size,
             final String mailType,
-            final DateTime sendDate,
+            final String sendDate,
             final Map<String, String> metadata,
             final Map<String, String> data,
             final String description) {
@@ -89,7 +91,7 @@ public class PostcardRequest extends AbstractDataFieldRequest implements HasLobP
         return mailType;
     }
 
-    public DateTime getSendDate() { return sendDate; }
+    public String getSendDate() { return sendDate; }
 
     @Override
     public String toString() {
@@ -117,7 +119,9 @@ public class PostcardRequest extends AbstractDataFieldRequest implements HasLobP
         private LobParam back;
         private String size;
         private String mailType;
-        private DateTime sendDate;
+        private String sendDate;
+
+        private final static DateTimeFormatter DATE_FORMAT = ISODateTimeFormat.dateTime();
 
         private Builder() {}
 
@@ -197,6 +201,11 @@ public class PostcardRequest extends AbstractDataFieldRequest implements HasLobP
         }
 
         public Builder sendDate(final DateTime sendDate) {
+            this.sendDate = sendDate.toString(DATE_FORMAT);
+            return this;
+        }
+
+        public Builder sendDate(final String sendDate) {
             this.sendDate = sendDate;
             return this;
         }

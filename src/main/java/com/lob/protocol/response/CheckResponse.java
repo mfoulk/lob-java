@@ -26,7 +26,7 @@ public class CheckResponse extends AbstractLobResponse {
     @JsonProperty private final List<TrackingEventResponse> trackingEvents;
     @JsonProperty private final DateTime expectedDeliveryDate;
     @JsonProperty private final String mailType;
-    @JsonProperty private final DateTime sendDate;
+    @JsonProperty private final String sendDate;
     @JsonProperty private final List<ThumbnailResponse> thumbnails;
 
     @JsonCreator
@@ -48,7 +48,7 @@ public class CheckResponse extends AbstractLobResponse {
             @JsonProperty("date_modified") final DateTime dateModified,
             @JsonProperty("expected_delivery_date") final DateTime expectedDeliveryDate,
             @JsonProperty("mail_type") final String mailType,
-            @JsonProperty("send_date") final DateTime sendDate,
+            @JsonProperty("send_date") final String sendDate,
             @JsonProperty("thumbnails") final List<ThumbnailResponse> thumbnails,
             @JsonProperty("metadata") final Map<String, String> metadata,
             @JsonProperty("object") final String object) {
@@ -127,7 +127,7 @@ public class CheckResponse extends AbstractLobResponse {
         return mailType;
     }
 
-    public DateTime getSendDate() {
+    public String getSendDate() {
         return sendDate;
     }
 
