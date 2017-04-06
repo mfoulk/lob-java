@@ -5,6 +5,7 @@ import com.lob.id.AddressId;
 import com.lob.id.BankAccountId;
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
+import org.joda.time.DateTime;
 
 import java.io.File;
 import java.util.Collection;
@@ -28,6 +29,7 @@ public class CheckRequest extends AbstractDataFieldRequest implements HasLobPara
     private final LobParam checkBottom;
     private final LobParam attachment;
     private final String mailType;
+    private final DateTime sendDate;
 
     public CheckRequest(
             final Integer checkNumber,
@@ -40,6 +42,7 @@ public class CheckRequest extends AbstractDataFieldRequest implements HasLobPara
             final LobParam logo,
             final LobParam checkBottom,
             final LobParam attachment,
+            final DateTime sendDate,
             final String mailType,
             final Map<String, String> metadata,
             final Map<String, String> data,
@@ -56,6 +59,7 @@ public class CheckRequest extends AbstractDataFieldRequest implements HasLobPara
         this.checkBottom = checkBottom;
         this.attachment = attachment;
         this.mailType = mailType;
+        this.sendDate = sendDate;
     }
 
     @Override
@@ -72,6 +76,7 @@ public class CheckRequest extends AbstractDataFieldRequest implements HasLobPara
             .put(checkBottom)
             .put(attachment)
             .put("mail_type", mailType)
+            .put("send_date", sendDate)
             .build();
     }
 
@@ -124,6 +129,8 @@ public class CheckRequest extends AbstractDataFieldRequest implements HasLobPara
         return mailType;
     }
 
+    public DateTime getSendDate() { return sendDate; }
+
     @Override
     public String toString() {
         return "CheckRequest{" +
@@ -138,6 +145,7 @@ public class CheckRequest extends AbstractDataFieldRequest implements HasLobPara
             ", checkBottom='" + checkBottom + '\'' +
             ", attachment='" + attachment + '\'' +
             ", mailType='" + mailType + '\'' +
+            ", sendDate='" + sendDate + '\'' +
             super.toString();
     }
 
@@ -157,6 +165,7 @@ public class CheckRequest extends AbstractDataFieldRequest implements HasLobPara
         private LobParam checkBottom;
         private LobParam attachment;
         private String mailType;
+        private DateTime sendDate;
 
         private Builder() {}
 
@@ -290,6 +299,11 @@ public class CheckRequest extends AbstractDataFieldRequest implements HasLobPara
             return this;
         }
 
+        public Builder sendDate(final DateTime sendDate) {
+            this.sendDate = sendDate;
+            return this;
+        }
+
         public Builder butWith() {
             return new Builder()
                 .checkNumber(checkNumber)
@@ -302,6 +316,7 @@ public class CheckRequest extends AbstractDataFieldRequest implements HasLobPara
                 .logo(logo)
                 .checkBottom(checkBottom)
                 .attachment(attachment)
+                .sendDate(sendDate)
                 .mailType(mailType)
                 .metadata(metadata)
                 .data(data)
@@ -309,7 +324,7 @@ public class CheckRequest extends AbstractDataFieldRequest implements HasLobPara
         }
 
         public CheckRequest build() {
-            return new CheckRequest(checkNumber, bankAccount, to, from, amount, message, memo, logo, checkBottom, attachment, mailType, metadata, data, description);
+            return new CheckRequest(checkNumber, bankAccount, to, from, amount, message, memo, logo, checkBottom, attachment, sendDate, mailType, metadata, data, description);
         }
     }
 }

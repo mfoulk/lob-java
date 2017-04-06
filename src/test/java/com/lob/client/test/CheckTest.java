@@ -102,6 +102,9 @@ public class CheckTest extends BaseTest {
         final AddressResponse address = getAddress();
         final BankAccountResponse bankAccount = getAndVerifyBankAccount();
 
+        // Need an API key with send_date enabled for this to work
+        // DateTime dt = new DateTime(2017, 4, 26, 0, 0, 0, 0);
+
         final CheckRequest.Builder builder = CheckRequest.builder()
             .bankAccount(bankAccount.getId())
             .description("check")
@@ -110,6 +113,7 @@ public class CheckTest extends BaseTest {
             .amount(1000)
             .message("test message")
             .checkNumber(100)
+            // .sendDate(dt)
             .memo("Test Check")
             .metadata(metadata);
 

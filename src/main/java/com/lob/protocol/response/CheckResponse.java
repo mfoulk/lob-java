@@ -26,6 +26,7 @@ public class CheckResponse extends AbstractLobResponse {
     @JsonProperty private final List<TrackingEventResponse> trackingEvents;
     @JsonProperty private final DateTime expectedDeliveryDate;
     @JsonProperty private final String mailType;
+    @JsonProperty private final DateTime sendDate;
     @JsonProperty private final List<ThumbnailResponse> thumbnails;
 
     @JsonCreator
@@ -47,6 +48,7 @@ public class CheckResponse extends AbstractLobResponse {
             @JsonProperty("date_modified") final DateTime dateModified,
             @JsonProperty("expected_delivery_date") final DateTime expectedDeliveryDate,
             @JsonProperty("mail_type") final String mailType,
+            @JsonProperty("send_Date") final DateTime sendDate,
             @JsonProperty("thumbnails") final List<ThumbnailResponse> thumbnails,
             @JsonProperty("metadata") final Map<String, String> metadata,
             @JsonProperty("object") final String object) {
@@ -65,6 +67,7 @@ public class CheckResponse extends AbstractLobResponse {
         this.trackingEvents = trackingEvents;
         this.expectedDeliveryDate = expectedDeliveryDate;
         this.mailType = mailType;
+        this.sendDate = sendDate;
         this.thumbnails = thumbnails;
     }
 
@@ -124,6 +127,8 @@ public class CheckResponse extends AbstractLobResponse {
         return mailType;
     }
 
+    public DateTime getSendDate() { return sendDate; }
+
     public List<ThumbnailResponse> getThumbnails() {
         return defensiveCopy(this.thumbnails);
     }
@@ -145,6 +150,7 @@ public class CheckResponse extends AbstractLobResponse {
             ", trackingEvents='" + trackingEvents + '\'' +
             ", expectedDeliveryDate=" + expectedDeliveryDate +
             ", mailType=" + mailType +
+            ", sendDate=" + sendDate +
             ", thumbnails=" + thumbnails +
             super.toString();
     }
