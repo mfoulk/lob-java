@@ -129,7 +129,9 @@ public class CheckRequest extends AbstractDataFieldRequest implements HasLobPara
         return mailType;
     }
 
-    public DateTime getSendDate() { return sendDate; }
+    public DateTime getSendDate() {
+        return sendDate;
+    }
 
     @Override
     public String toString() {

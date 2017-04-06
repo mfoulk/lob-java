@@ -48,7 +48,7 @@ public class CheckResponse extends AbstractLobResponse {
             @JsonProperty("date_modified") final DateTime dateModified,
             @JsonProperty("expected_delivery_date") final DateTime expectedDeliveryDate,
             @JsonProperty("mail_type") final String mailType,
-            @JsonProperty("send_Date") final DateTime sendDate,
+            @JsonProperty("send_date") final DateTime sendDate,
             @JsonProperty("thumbnails") final List<ThumbnailResponse> thumbnails,
             @JsonProperty("metadata") final Map<String, String> metadata,
             @JsonProperty("object") final String object) {
