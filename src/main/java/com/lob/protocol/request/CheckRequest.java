@@ -158,6 +158,8 @@ public class CheckRequest extends AbstractDataFieldRequest implements HasLobPara
     }
 
     public static class Builder extends AbstractDataFieldRequest.Builder<Builder> {
+        private final static DateTimeFormatter DATE_FORMAT = ISODateTimeFormat.dateTime();
+
         private Integer checkNumber;
         private BankAccountId bankAccount;
         private Or<AddressId, AddressRequest> to;
@@ -170,8 +172,6 @@ public class CheckRequest extends AbstractDataFieldRequest implements HasLobPara
         private LobParam attachment;
         private String mailType;
         private String sendDate;
-
-        private final static DateTimeFormatter DATE_FORMAT = ISODateTimeFormat.dateTime();
 
         private Builder() {}
 

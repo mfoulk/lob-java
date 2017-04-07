@@ -112,6 +112,8 @@ public class PostcardRequest extends AbstractDataFieldRequest implements HasLobP
     }
 
     public static class Builder extends AbstractDataFieldRequest.Builder<Builder> {
+        private final static DateTimeFormatter DATE_FORMAT = ISODateTimeFormat.dateTime();
+
         private Or<AddressId, AddressRequest> to;
         private Or<AddressId, AddressRequest> from;
         private String message;
@@ -120,8 +122,6 @@ public class PostcardRequest extends AbstractDataFieldRequest implements HasLobP
         private String size;
         private String mailType;
         private String sendDate;
-
-        private final static DateTimeFormatter DATE_FORMAT = ISODateTimeFormat.dateTime();
 
         private Builder() {}
 
