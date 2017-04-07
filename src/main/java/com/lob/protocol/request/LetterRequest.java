@@ -13,6 +13,7 @@ import static com.lob.Util.checkNotNull;
 
 public class LetterRequest extends AbstractDataFieldRequest implements HasLobParams {
     private final static String FILE = "file";
+    private final static DateTimeFormatter DATE_FORMAT = ISODateTimeFormat.dateTime();
 
     private final Or<AddressId, AddressRequest> to;
     private final Or<AddressId, AddressRequest> from;
@@ -25,8 +26,6 @@ public class LetterRequest extends AbstractDataFieldRequest implements HasLobPar
     private final Integer perforatedPage;
     private final String mailType;
     private final String sendDate;
-
-
 
     public LetterRequest(
             final String description,
@@ -128,8 +127,6 @@ public class LetterRequest extends AbstractDataFieldRequest implements HasLobPar
         private Integer perforatedPage;
         private String mailType;
         private String sendDate;
-
-        private final static DateTimeFormatter DATE_FORMAT = ISODateTimeFormat.dateTime();
 
         private Builder() {}
 

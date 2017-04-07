@@ -71,27 +71,6 @@ public class CheckExample extends BaseExample {
 
         printResponse("Check Response", exampleCheckResponse);
 
-        final CheckRequest exampleCheckRequest = CheckRequest.builder()
-                .description("Example Check with Send Date")
-                .to(AddressRequest.builder()
-                        .name("Lob")
-                        .line1("185 Berry Street")
-                        .line2("Suite 1510")
-                        .city("San Francisco")
-                        .state("CA")
-                        .zip("94107")
-                        .country("us")
-                        .build())
-                .from(exampleAddressResponse.getId())
-                .bankAccount(exampleBankAccountResponse.getId())
-                .amount(1000)
-                .memo("Services Rendered")
-                .logo("https://s3-us-west-2.amazonaws.com/lob-assets/lob_check_logo.png")
-                .build();
-        final CheckResponse exampleCheckResponse = client.createCheck(exampleCheckRequest).get();
-
-        printResponse("Check Response", exampleCheckResponse);
-
         System.exit(0);
     }
 }
